@@ -1,9 +1,15 @@
+/*
+Name: Dinuka Ravijaya Piyadigama
+IIT ID: 2018373
+UoW ID: w1742104
+ */
+
 package lk.dinuka.MaxFlowProblem;
 
 import java.util.LinkedList;
 
 public class MaxFlowTester {
-    static final int V = 6;    //Number of vertices in graph
+    static final int V = 6;    //Number of vertices the flow network
 
     /* Returns true if there is a path from source 's' to sink
       't' in residual graph. Also fills parent[] to store the
@@ -20,7 +26,8 @@ public class MaxFlowTester {
         LinkedList<Integer> queue = new LinkedList<Integer>();
         queue.add(s);
         visited[s] = true;          // source is always visited at the beginning
-        parent[s] = -1;             //----------------------? what is this doing>>>>>???
+        parent[s] = -1;             // -1 is never given to a node,
+        // it's used to identify that there's no node before the source node
 
         // Standard BFS Loop
         while (queue.size() != 0) {
@@ -31,10 +38,10 @@ public class MaxFlowTester {
                     // if the node hasn't been visited previously and
                     // if a capacity exists outward from a node
                     // rGraph[][] index = Node
-                    // rGraph[0][1] = Outward Capacity of Edge from 0 to 1
+                    // Eg: rGraph[0][1] = Outward Capacity of Edge from 0 to 1
 
-                    queue.add(v);           // adding all the nodes into the queue in increasing order
-                    parent[v] = u;          // stores the path from s-------------------------->>>>>>>>>????????
+                    queue.add(v);           // adding all the nodes into the queue in increasing order of end node
+                    parent[v] = u;          // stores the node before node v (which is node u) at the index v
                     visited[v] = true;      // marking the node which was just added to the queue as visited
                 }
             }
@@ -58,14 +65,16 @@ public class MaxFlowTester {
         // residual capacity of edge from i to j (if there
         // is an edge. If rGraph[i][j] is 0, then there is
         // not)
-        int rGraph[][] = new int[V][V];
+        int rGraph[][] = new int[V][V];     // initializing residual graph
 
         for (u = 0; u < V; u++)
             for (v = 0; v < V; v++)
+                // initial residual capacities are equal to the capacities of the edges
                 rGraph[u][v] = graph[u][v];
 
-        // This array is filled by BFS and to store path
-        int parent[] = new int[V];                  // why is it initialized with V------------->>>>>>>?????????
+        // This array is filled by BFS and used to store the residual path
+        int parent[] = new int[V];
+        // initialized with V because the max path can have all the number of vertices in the graph (same node can't be visited more than once)
 
         int max_flow = 0;  // There is no flow initially
 
@@ -73,10 +82,12 @@ public class MaxFlowTester {
         while (bfs(rGraph, s, t, parent)) {
             // Find minimum residual capacity of the edges along the path filled by BFS.
             // Or we can say; find the maximum flow through the path found.
-            int path_flow = Integer.MAX_VALUE;          // assigning the maximum value an integer can have---------->>>>>>???????
-            for (v = t; v != s; v = parent[v]) {        // what is parent[v] doing ------------>>>>>>>>????????
+            int path_flow = Integer.MAX_VALUE;          // assigning the maximum value an integer can have - because minimum residual capacity is needed to be found
+            for (v = t; v != s; v = parent[v]) {
+//                v = parent[v]       // since this is the residual path, the previous visited node(u) is taken after v
+
                 u = parent[v];
-                path_flow = Math.min(path_flow, rGraph[u][v]);      // getting the minimum value out of path_flow and rGraph[u][v]
+                path_flow = Math.min(path_flow, rGraph[u][v]);      // getting the minimum value out of path_flow and rGraph[u][v] (capacity of edge in residual graph)
             }
 
             // update residual capacities of the edges and reverse edges along the path
@@ -99,7 +110,7 @@ public class MaxFlowTester {
         // Let us create a graph shown in the above example
         // 2-D array is used
         // graph[][] index = Node
-        // graph[0][2] = Outward Capacity of Edge from node 0 to node 2
+        // Eg: graph[0][2] = Outward Capacity of Edge from node 0 to node 2
         int graph[][] = new int[][]{{0, 16, 13, 0, 0, 0},
                 {0, 0, 10, 12, 0, 0},
                 {0, 4, 0, 0, 14, 0},
