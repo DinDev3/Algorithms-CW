@@ -141,8 +141,7 @@ public class MaxFlow {
         System.out.println("~ Initial graph of flow network ~");
         System.out.println(Arrays.deepToString(graph) + "\n");
 
-        System.out.println("The Maximum Possible Flow is: " +
-                m.fordFulkerson(graph, 0, 5));
+        System.out.println("The Maximum Possible Flow is: " + m.fordFulkerson(graph, 0, 5));
 
     }
 }

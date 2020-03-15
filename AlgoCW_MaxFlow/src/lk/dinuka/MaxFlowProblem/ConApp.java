@@ -29,6 +29,9 @@ public class ConApp {
         int chosenOption;
 
         do {
+            System.out.println("\n\t\\~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/");
+            System.out.println("\t\t||\t~~\tMax Flow Calculator\t~~\t||");
+            System.out.println("\t/~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\");
 
             //display main menu
             System.out.println("\n1) Initialize the flow network");
@@ -62,7 +65,8 @@ public class ConApp {
                     viewGraph();
                     break;
                 case 6:     // Exit program
-//                display exit message ---------------------------->>>>>>>>>>>>>>>
+                    System.out.println("Thank you for using Max Flow Calculator");
+                    System.out.println("Exiting Program...");
                     System.exit(0);     // close program
 
                 default:        // if the entered number isn't within the accepted range
@@ -82,6 +86,7 @@ public class ConApp {
         while (noOfNodes < 6) {
             System.out.println("The flow network must comprise of at least 6 nodes");              // allowing only floor network that have at least 6 nodes
             System.out.print("Please enter a greater amount of nodes: ");
+            intInputValidation();           // validating integer input
             noOfNodes = sc.nextInt();
         }
 
@@ -103,9 +108,24 @@ public class ConApp {
 
 
         System.out.print("\n\nChoose the source of the floor network: ");
+        intInputValidation();           // validating integer input
         source = sc.nextInt();
-        System.out.print("Choose the sink of the floor network: ");
+        while (!graphMap.containsKey(source)) {
+            System.out.println("The source node has to take a number between 0 to " + (noOfNodes - 1));
+            System.out.print("Please enter a valid source: ");
+            intInputValidation();           // validating integer input
+            source = sc.nextInt();
+        }
+
+        System.out.print("\nChoose the sink of the floor network: ");
+        intInputValidation();           // validating integer input
         sink = sc.nextInt();
+        while (!graphMap.containsKey(sink)) {
+            System.out.println("The sink node has to take a number between 0 to " + (noOfNodes - 1));
+            System.out.print("Please enter a valid sink: ");
+            intInputValidation();           // validating integer input
+            sink = sc.nextInt();
+        }
 
 
         // --------------------------------------------------------------------------
@@ -157,24 +177,27 @@ public class ConApp {
 
 
     private static void findMaxFlowOfNetwork() {            // Find the Max Flow of the flow network
-        //---------- graph created from user input
-        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
-        for (int i = 0; i < noOfNodes; i++) {
-            for (int q = 0; q < noOfNodes; q++) {
-                graph[i][q] = graphMap.get(i)[q];
-            }
-        }
+//        //---------- graph created from user input
+//        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
+//        for (int i = 0; i < noOfNodes; i++) {
+//            for (int q = 0; q < noOfNodes; q++) {
+//                graph[i][q] = graphMap.get(i)[q];
+//            }
+//        }
 
         //---------- hard-coded graph
-//        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
-//                {0, 0, 10, 12, 0, 0},
-//                {0, 4, 0, 0, 14, 0},
-//                {0, 0, 9, 0, 0, 20},
-//                {0, 0, 0, 7, 0, 4},
-//                {0, 0, 0, 0, 0, 0}
-//        };
-//
-//        noOfNodes = 6;
+        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
+                {0, 0, 10, 12, 0, 0},
+                {0, 4, 0, 0, 14, 0},
+                {0, 0, 9, 0, 0, 20},
+                {0, 0, 0, 7, 0, 4},
+                {0, 0, 0, 0, 0, 0}
+        };
+
+        noOfNodes = 6;
+        source = 0;
+        sink = 5;
+        //-----------
 
         MaxFlow.totalVertices = noOfNodes;
 
@@ -183,10 +206,22 @@ public class ConApp {
         System.out.println("~ Initial graph of flow network ~");
         System.out.println(Arrays.deepToString(graph) + "\n");
 
-//        run this only if a flow network has been initialized with nodes------->>>>>>>>>>>>>>> otherwise index out of bounds error will be given>>>>>>>>>
 
-        System.out.println("The Maximum Possible Flow is: " +
-                m.fordFulkerson(graph, source, sink));
+        try {      // run this only if a flow network has been initialized with sink & source -> otherwise index out of bounds error will be given
+            long startTime = System.nanoTime();
+            System.out.println("The Maximum Possible Flow is: " + m.fordFulkerson(graph, source, sink));
+            long endTime = System.nanoTime();
+
+            // get difference of two nanoTime values
+            long timeElapsed = endTime - startTime;
+            System.out.println("\nExecution time in nanoseconds  : " + timeElapsed);
+
+//            System.out.println(getTimeRatio(timeElapsed, timeElapsed));
+
+        } catch (Exception e) {
+            System.out.println("The graph needs to be initialized with a sink and a source before calculating the Max Flow");
+        }
+
 
     }
 
@@ -229,7 +264,7 @@ public class ConApp {
     }
 
 
-    private static void viewGraph() {           // View the graph created of the flow network
+    private static void viewGraph() {           // View the graph created of the flow network (only if the graph was created from the console menu)
         // useful to check whether deletions/ modifications were made to the flow network as expected before trying to find max flow
 
         //---------- graph created from user input
@@ -244,6 +279,10 @@ public class ConApp {
     }
 
     //--------------------
+
+    public static float getTimeRatio(long firstTime, long secondTime) {      // get the ratio of changes between multiple times
+        return (float) firstTime / secondTime;
+    }
 
     private static void intInputValidation() {                     //validating integer input
 
