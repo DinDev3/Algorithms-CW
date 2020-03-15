@@ -85,56 +85,86 @@ public class ConApp {
 
 
         // --------------------------------------------------------------------------
-//        System.out.println("~ Enter capacities between the nodes of the network ~");
-//
-//        int noOfCapacitiesTBA;
-//
-//        do {        // there should be at least one capacity
-//            System.out.print("Enter the starting node of the flow: ");
-//            intInputValidation();
-//            sc.nextInt();
-//
-//            System.out.print("Enter the ending node of the flow: ");
-//            intInputValidation();
-//            sc.nextInt();
-//
-//            System.out.println();
-//
-//            System.out.print("Enter the capacity of the Edge between these two nodes: ");
-//            intInputValidation();
-//            sc.nextInt();
-//
-//            System.out.println("If you wish to enter another capacity, input any integer number");
-//            System.out.println("Enter -1 to stop adding capacities");
-//            intInputValidation();
-//            noOfCapacitiesTBA = sc.nextInt();
-//
-//        } while (noOfCapacitiesTBA != -1);
+        System.out.println("~ Enter capacities between the nodes of the network ~");
+
+        int noOfCapacitiesTBA = 1;
+
+        do {        // there should be at least one capacity between a pair of nodes in the graph
+
+            for (int n = 1; n <= noOfCapacitiesTBA; n++) {
+
+                System.out.println("Enter the starting & ending nodes of the flow");
+                System.out.print("Starting Node: ");
+                intInputValidation();
+                int startNode = sc.nextInt();
+
+                System.out.print("Ending Node: ");
+                intInputValidation();
+                int endNode = sc.nextInt();
+
+                System.out.print("Enter the capacity of the Edge between these two nodes: ");
+                intInputValidation();
+                int capacity = sc.nextInt();
+
+
+                int[] modifiedArray = graphMap.get(startNode);
+                modifiedArray[endNode] = capacity;          // changing the capacity of the array at the given point
+
+                graphMap.put(startNode, modifiedArray);          // adding the newly modified array into the hashmap
+
+
+                System.out.println();
+            }
+
+            System.out.println("How many more capacities do you wish to enter");
+            System.out.println("Enter -1 to stop adding capacities");
+            intInputValidation();
+            noOfCapacitiesTBA = sc.nextInt();
+
+        } while (noOfCapacitiesTBA != -1);
         // --------------------------------------------------------------------------
 
+
+//        for (int i = 0; i < noOfNodes; ++i) {               // checking HashMap values
+//            System.out.println(Arrays.toString(graphMap.get(i)));
+//        }
 
     }
 
 
     private static void findMaxFlowOfNetwork() {            // Find the Max Flow of the flow network
-//        int[][] graph = new int[][]{};                // assign inputs to this array here
-        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
-                {0, 0, 10, 12, 0, 0},
-                {0, 4, 0, 0, 14, 0},
-                {0, 0, 9, 0, 0, 20},
-                {0, 0, 0, 7, 0, 4},
-                {0, 0, 0, 0, 0, 0}
-        };
+        //---------- graph created from user input
+        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
+        for (int i = 0; i < noOfNodes; i++) {
+            for (int q = 0; q < noOfNodes; q++) {
+                graph[i][q] = graphMap.get(i)[q];
+            }
+        }
 
-        MaxFlow.totalVertices = 6;
+        System.out.println(Arrays.toString(graph));
+
+        //---------- hard-coded graph
+//        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
+//                {0, 0, 10, 12, 0, 0},
+//                {0, 4, 0, 0, 14, 0},
+//                {0, 0, 9, 0, 0, 20},
+//                {0, 0, 0, 7, 0, 4},
+//                {0, 0, 0, 0, 0, 0}
+//        };
+//
+//        noOfNodes = 6;
+
+        MaxFlow.totalVertices = noOfNodes;
 
         MaxFlow m = new MaxFlow();
 
         System.out.println("~ Initial graph of flow network ~");
         System.out.println(Arrays.deepToString(graph) + "\n");
 
+//        run this only if a flow network has been initialized with nodes------->>>>>>>>>>>>>>> otherwise index out of bounds error will be given>>>>>>>>>
+
         System.out.println("The Maximum Possible Flow is: " +
-                m.fordFulkerson(graph, 0, 5));
+                m.fordFulkerson(graph, 0, 3));
 
     }
 
