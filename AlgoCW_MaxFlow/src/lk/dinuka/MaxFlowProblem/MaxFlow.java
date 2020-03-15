@@ -12,7 +12,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class MaxFlow {
-    static final int totalVertices = 6;    //Number of vertices the flow network
+//    static int totalVertices = 6;    //Number of vertices the flow network
+    static int totalVertices;    //Number of vertices the flow network
 
     /* Returns true if there is a path from source 's' to sink
       't' in residual graph. Also fills parent[] to store the
@@ -132,6 +133,9 @@ public class MaxFlow {
                 {0, 0, 0, 7, 0, 4},
                 {0, 0, 0, 0, 0, 0}
         };
+
+        totalVertices =6;
+
         MaxFlow m = new MaxFlow();
 
         System.out.println("~ Initial graph of flow network ~");

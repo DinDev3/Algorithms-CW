@@ -9,6 +9,7 @@ UoW ID: w1742104
 package lk.dinuka.MaxFlowProblem;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class ConApp {
@@ -16,6 +17,10 @@ public class ConApp {
     // if a capacity exists, an edge exists between two nodes
 
     static Scanner sc = new Scanner(System.in);            // scanner which used to get inputs from the user
+
+    static HashMap<Integer, int[]> graphMap = new HashMap<>();       // stores inputs of the user
+//    Key: starting node,
+//    Value: array with ending node as index of array. Capacity as value at each index in array.
 
 
     public static void main(String[] args) {
@@ -61,17 +66,30 @@ public class ConApp {
     }
 
 
-
-    private static void initializeFlowNetwork(){            // case 1
+    private static void initializeFlowNetwork() {            // initialize flow network
         System.out.println("Enter the number of Nodes in the flow network");
         System.out.print(">");
         intInputValidation();       // integer input validation
         noOfNodes = sc.nextInt();       // assigning user input to number of nodes in the flow network
 
-//        System.out.println("~Enter capacities between the nodes of the network~");
-//        System.out.println("Enter -1 to stop adding capacities");
+
+        System.out.println("Creating the graph with capacities...");
+        for (int i = 0; i < noOfNodes; ++i) {
+            // array is created inside the for loop to create new arrays. Or else same array will be referenced from all hashmap values
+            int[] arrayOfCapacities = new int[noOfNodes];          // all HashMap values are initialized with this. It holds the outward capacities in edges relevant to one node
+
+            graphMap.put(i, arrayOfCapacities);
+            System.out.println(Arrays.toString(graphMap.get(i)));
+        }
+//        System.out.println(graphMap.toString());      // to test the values (array references)
+
+
+        // --------------------------------------------------------------------------
+//        System.out.println("~ Enter capacities between the nodes of the network ~");
 //
-//        do {
+//        int noOfCapacitiesTBA;
+//
+//        do {        // there should be at least one capacity
 //            System.out.print("Enter the starting node of the flow: ");
 //            intInputValidation();
 //            sc.nextInt();
@@ -82,15 +100,23 @@ public class ConApp {
 //
 //            System.out.println();
 //
-//        } while();         //
-
-//while (input!=-1)
+//            System.out.print("Enter the capacity of the Edge between these two nodes: ");
+//            intInputValidation();
+//            sc.nextInt();
+//
+//            System.out.println("If you wish to enter another capacity, input any integer number");
+//            System.out.println("Enter -1 to stop adding capacities");
+//            intInputValidation();
+//            noOfCapacitiesTBA = sc.nextInt();
+//
+//        } while (noOfCapacitiesTBA != -1);
+        // --------------------------------------------------------------------------
 
 
     }
 
 
-    private static void findMaxFlowOfNetwork() {            // case 2
+    private static void findMaxFlowOfNetwork() {            // Find the Max Flow of the flow network
 //        int[][] graph = new int[][]{};                // assign inputs to this array here
         int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
                 {0, 0, 10, 12, 0, 0},
@@ -99,6 +125,8 @@ public class ConApp {
                 {0, 0, 0, 7, 0, 4},
                 {0, 0, 0, 0, 0, 0}
         };
+
+        MaxFlow.totalVertices = 6;
 
         MaxFlow m = new MaxFlow();
 
@@ -110,14 +138,13 @@ public class ConApp {
 
     }
 
-    private static void deleteLink() {      // case 3
+    private static void deleteLink() {      // Delete link from flow network
 
     }
 
-    private static void modifyMaxCapacity() {       // case 4
+    private static void modifyMaxCapacity() {       // Modify the maximum capacity of a link
 
     }
-
 
 
     //--------------------
