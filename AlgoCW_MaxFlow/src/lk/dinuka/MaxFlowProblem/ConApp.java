@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 public class ConApp {
     private static int noOfNodes;
+    private static int source;              // starting node of the floor network
+    private static int sink;              // ending node of the floor network
     // if a capacity exists, an edge exists between two nodes
 
     static Scanner sc = new Scanner(System.in);            // scanner which used to get inputs from the user
@@ -33,7 +35,8 @@ public class ConApp {
             System.out.println("2) Find the Max Flow of the flow network");
             System.out.println("3) Delete link from flow network");
             System.out.println("4) Modify the maximum capacity of a link");
-            System.out.println("5) Exit program");
+            System.out.println("5) View Created Graph of the flow network");
+            System.out.println("6) Exit program");
 //            Scanner sc = new Scanner(System.in);
             System.out.print("\nEnter Option:\n>>");
 
@@ -55,14 +58,17 @@ public class ConApp {
                 case 4:     // Modify the maximum capacity of a link
                     modifyMaxCapacity();
                     break;
-                case 5:     // Exit program
+                case 5:     // view created graph
+                    viewGraph();
+                    break;
+                case 6:     // Exit program
 //                display exit message ---------------------------->>>>>>>>>>>>>>>
                     System.exit(0);     // close program
+
                 default:        // if the entered number isn't within the accepted range
                     System.out.println("Invalid input. Please try again");
             }
-        } while (chosenOption != 5);
-        System.out.print("Enter the number of Nodes: ");
+        } while (chosenOption != 6);
     }
 
 
@@ -70,10 +76,17 @@ public class ConApp {
         System.out.println("Enter the number of Nodes in the flow network");
         System.out.print(">");
         intInputValidation();       // integer input validation
+
         noOfNodes = sc.nextInt();       // assigning user input to number of nodes in the flow network
 
+        while (noOfNodes < 6) {
+            System.out.println("The flow network must comprise of at least 6 nodes");              // allowing only floor network that have at least 6 nodes
+            System.out.print("Please enter a greater amount of nodes: ");
+            noOfNodes = sc.nextInt();
+        }
 
-        System.out.println("Creating the graph with capacities...");
+
+        System.out.println("\nCreating the graph with capacities...");
         for (int i = 0; i < noOfNodes; ++i) {
             // array is created inside the for loop to create new arrays. Or else same array will be referenced from all hashmap values
             int[] arrayOfCapacities = new int[noOfNodes];          // all HashMap values are initialized with this. It holds the outward capacities in edges relevant to one node
@@ -83,9 +96,20 @@ public class ConApp {
         }
 //        System.out.println(graphMap.toString());      // to test the values (array references)
 
+        System.out.print("The nodes of the graph are: ");
+        for (int i = 0; i < noOfNodes; ++i) {
+            System.out.print(i + " ");
+        }
+
+
+        System.out.print("\n\nChoose the source of the floor network: ");
+        source = sc.nextInt();
+        System.out.print("Choose the sink of the floor network: ");
+        sink = sc.nextInt();
+
 
         // --------------------------------------------------------------------------
-        System.out.println("~ Enter capacities between the nodes of the network ~");
+        System.out.println("\n\n~ Enter capacities between the nodes of the network ~");
 
         int noOfCapacitiesTBA = 1;
 
@@ -141,8 +165,6 @@ public class ConApp {
             }
         }
 
-        System.out.println(Arrays.toString(graph));
-
         //---------- hard-coded graph
 //        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
 //                {0, 0, 10, 12, 0, 0},
@@ -164,11 +186,18 @@ public class ConApp {
 //        run this only if a flow network has been initialized with nodes------->>>>>>>>>>>>>>> otherwise index out of bounds error will be given>>>>>>>>>
 
         System.out.println("The Maximum Possible Flow is: " +
-                m.fordFulkerson(graph, 0, 3));
+                m.fordFulkerson(graph, source, sink));
 
     }
 
     private static void deleteLink() {      // Delete link from flow network
+        System.out.println("Choose the starting and ending nodes of the link to be deleted");
+
+        System.out.print("Starting node: ");
+        intInputValidation();       // validate integer input
+        sc.nextInt();
+
+        System.out.print("Ending node: ");
 
     }
 
@@ -176,6 +205,18 @@ public class ConApp {
 
     }
 
+
+    private static void viewGraph() {           // View the graph created of the flow network
+        //---------- graph created from user input
+        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
+        for (int i = 0; i < noOfNodes; i++) {
+            for (int q = 0; q < noOfNodes; q++) {
+                graph[i][q] = graphMap.get(i)[q];
+            }
+        }
+
+        System.out.println(Arrays.deepToString(graph));         // display graph
+    }
 
     //--------------------
 
