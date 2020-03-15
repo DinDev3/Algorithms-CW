@@ -8,6 +8,7 @@ UoW ID: w1742104
 
 package lk.dinuka.MaxFlowProblem;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ConApp {
@@ -99,12 +100,13 @@ public class ConApp {
                 {0, 0, 0, 0, 0, 0}
         };
 
-
-
         MaxFlow m = new MaxFlow();
+
+        System.out.println("~ Initial graph of flow network ~");
+        System.out.println(Arrays.deepToString(graph) + "\n");
+
         System.out.println("The Maximum Possible Flow is: " +
                 m.fordFulkerson(graph, 0, 5));
-
 
     }
 

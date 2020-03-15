@@ -8,6 +8,7 @@ UoW ID: w1742104
 
 package lk.dinuka.MaxFlowProblem;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class MaxFlow {
@@ -70,6 +71,7 @@ public class MaxFlow {
             is an edge. If rGraph[i][j] is 0, then there is
             not) */
         int[][] residualGraph = new int[totalVertices][totalVertices];     // initializing residual graph
+        int[][] updatedGraph = new int[totalVertices][totalVertices];       // initializing updated graph - to view the flow network when the program is running
 
         for (u = 0; u < totalVertices; u++)
             for (v = 0; v < totalVertices; v++)
@@ -99,6 +101,14 @@ public class MaxFlow {
                 u = parent[v];
                 residualGraph[u][v] -= pathFlow;              // decreasing capacity from the flow sent; to get the residual capacity (forward direction)
                 residualGraph[v][u] += pathFlow;              // adding the flow sent to the reverse capacity; to get the residual capacity (backward direction)
+
+                updatedGraph[u][v] = graph[u][v] - residualGraph[u][v];
+
+                System.out.println("~ Residual graph of the flow network");
+                System.out.println(Arrays.deepToString(residualGraph));         // printing the 2D array to view the residual capacities of the graph
+
+                System.out.println("~ Updated graph of the flow network");
+                System.out.println(Arrays.deepToString(updatedGraph) + "\n");
             }
 
             /* Add path flow to overall flow */
@@ -108,7 +118,6 @@ public class MaxFlow {
         /* Return the overall flow */
         return maxFlow;
     }
-
 
 
     /* Driver program to test above functions */
@@ -124,6 +133,9 @@ public class MaxFlow {
                 {0, 0, 0, 0, 0, 0}
         };
         MaxFlow m = new MaxFlow();
+
+        System.out.println("~ Initial graph of flow network ~");
+        System.out.println(Arrays.deepToString(graph) + "\n");
 
         System.out.println("The Maximum Possible Flow is: " +
                 m.fordFulkerson(graph, 0, 5));
