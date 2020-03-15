@@ -195,18 +195,43 @@ public class ConApp {
 
         System.out.print("Starting node: ");
         intInputValidation();       // validate integer input
-        sc.nextInt();
+        int startNode = sc.nextInt();
 
         System.out.print("Ending node: ");
+        intInputValidation();       // validate integer input
+        int endNode = sc.nextInt();
+
+        graphMap.get(startNode)[endNode] = 0;           // when the capacity is 0; there's no link between the two nodes
+
+        System.out.println("Successfully deleted the link between " + startNode + " & " + endNode + " nodes from the flow network");
 
     }
 
     private static void modifyMaxCapacity() {       // Modify the maximum capacity of a link
+        System.out.println("Choose the starting and ending nodes of the link to be modified");
+
+        System.out.print("Starting node: ");
+        intInputValidation();       // validate integer input
+        int startNode = sc.nextInt();
+
+        System.out.print("Ending node: ");
+        intInputValidation();       // validate integer input
+        int endNode = sc.nextInt();
+
+        System.out.print("Enter the new maximum capacity of the link: ");
+        intInputValidation();             // validate integer input
+        int changedMaxCapacity = sc.nextInt();
+
+        graphMap.get(startNode)[endNode] = changedMaxCapacity;           // new max capacity assigned
+
+        System.out.println("Successfully changed the maximum capacity on the link between " + startNode + " & " + endNode + " nodes of the flow network");
 
     }
 
 
     private static void viewGraph() {           // View the graph created of the flow network
+        // useful to check whether deletions/ modifications were made to the flow network as expected before trying to find max flow
+
         //---------- graph created from user input
         int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
         for (int i = 0; i < noOfNodes; i++) {
