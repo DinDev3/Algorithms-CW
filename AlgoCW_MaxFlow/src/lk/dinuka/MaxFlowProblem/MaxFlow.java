@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class MaxFlow {
-//    static int totalVertices = 6;    //Number of vertices the flow network
+    //    static int totalVertices = 6;    //Number of vertices the flow network
     static int totalVertices;    //Number of vertices the flow network
 
     /* Returns true if there is a path from source 's' to sink
@@ -126,22 +126,47 @@ public class MaxFlow {
         // 2-D array is used to create the graph of the flow network
         // graph[][] index = Node
         // Eg: graph[0][2] = Outward Capacity of Edge from node 0 to node 2
-        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
-                {0, 0, 10, 12, 0, 0},
-                {0, 4, 0, 0, 14, 0},
-                {0, 0, 9, 0, 0, 20},
-                {0, 0, 0, 7, 0, 4},
-                {0, 0, 0, 0, 0, 0}
+//        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
+//                {0, 0, 10, 12, 0, 0},
+//                {0, 4, 0, 0, 14, 0},
+//                {0, 0, 9, 0, 0, 20},
+//                {0, 0, 0, 7, 0, 4},
+//                {0, 0, 0, 0, 0, 0}
+//        };
+//        totalVertices =6;
+
+
+        int[][] graph = new int[][]{
+                {0, 16, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0},
+                {0, 0, 0, 12, 0, 0, 0, 0, 10, 0, 0, 0},
+                {0, 0, 0, 0, 14, 0, 0, 4, 0, 0, 0, 0},
+                {0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 0, 20},
+                {0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 4},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 16, 0, 0, 0, 0, 0, 0, 13, 0, 0, 0},
+                {0, 0, 0, 12, 0, 0, 0, 0, 10, 0, 0, 0},
+                {0, 4, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 4},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
+        totalVertices = 12;
 
-        totalVertices =6;
 
+
+        // -----------------------------------------------------------
         MaxFlow m = new MaxFlow();
 
         System.out.println("~ Initial graph of flow network ~");
         System.out.println(Arrays.deepToString(graph) + "\n");
 
+        long startTime = System.nanoTime();
         System.out.println("The Maximum Possible Flow is: " + m.fordFulkerson(graph, 0, 5));
+        long endTime = System.nanoTime();
+
+        // get difference of two nanoTime values
+        long timeElapsed = endTime - startTime;
+        System.out.println("\nExecution time in nanoseconds  : " + timeElapsed);
 
     }
 }
