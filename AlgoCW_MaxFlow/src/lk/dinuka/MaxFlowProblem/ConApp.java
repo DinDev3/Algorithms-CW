@@ -36,9 +36,9 @@ public class ConApp {
             //display main menu
             System.out.println("\n1) Initialize the flow network");
             System.out.println("2) Find the Max Flow of the flow network");
-            System.out.println("3) Delete link from flow network");
+            System.out.println("3) Delete a link from flow network");
             System.out.println("4) Modify the maximum capacity of a link");
-            System.out.println("5) View Created Graph of the flow network");
+            System.out.println("5) View Created Graph of the flow network");        // view of 2D array in console
             System.out.println("6) Exit program");
 //            Scanner sc = new Scanner(System.in);
             System.out.print("\nEnter Option:\n>>");
@@ -216,7 +216,7 @@ public class ConApp {
             long timeElapsed = endTime - startTime;
             System.out.println("\nExecution time in nanoseconds  : " + timeElapsed);
 
-//            System.out.println(getTimeRatio(timeElapsed, timeElapsed));
+//            System.out.println(getTimeRatio(timeElapsed1, timeElapsed2));
 
         } catch (Exception e) {
             System.out.println("The graph needs to be initialized with a sink and a source before calculating the Max Flow");
@@ -225,7 +225,7 @@ public class ConApp {
 
     }
 
-    private static void deleteLink() {      // Delete link from flow network
+    private static void deleteLink() {      // Delete a link from flow network
         System.out.println("Choose the starting and ending nodes of the link to be deleted");
 
         System.out.print("Starting node: ");

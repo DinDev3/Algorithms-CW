@@ -22,7 +22,7 @@ public class MaxFlow {
       path */
     boolean bfs(int[][] residualGraph, int source, int sink, int[] parent) {
         /* Create a visited array and mark all vertices as not visited */
-        // A queue is used because the algorithm is implemented with Breath First Search <-------reason-------->
+        // A queue is used because the algorithm is implemented with Breath First Search
         boolean[] visited = new boolean[totalVertices];
         for (int i = 0; i < totalVertices; ++i)
             visited[i] = false;

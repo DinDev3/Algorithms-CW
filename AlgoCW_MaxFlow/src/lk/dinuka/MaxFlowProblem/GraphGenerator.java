@@ -1,3 +1,11 @@
+/*
+
+Name: Dinuka Ravijaya Piyadigama
+IIT ID: 2018373
+UoW ID: w1742104
+
+ */
+
 package lk.dinuka.MaxFlowProblem;
 
 import java.util.Arrays;
