@@ -8,6 +8,7 @@ UoW ID: w1742104
 
 package lk.dinuka.MaxFlowProblem;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -106,6 +107,7 @@ public class MaxFlow {
                 residualGraph[v][u] += pathFlow;              // adding the flow sent to the reverse capacity; to get the residual capacity (backward direction)
 
                 updatedGraph[u][v] = graph[u][v] - residualGraph[u][v];
+                displayGraph(updatedGraph);
 
                 System.out.println("~ Residual graph of the flow network");
                 System.out.println(Arrays.deepToString(residualGraph));         // printing the 2D array to view the residual capacities of the graph
@@ -121,6 +123,25 @@ public class MaxFlow {
         /* Return the overall flow */
         return maxFlow;
     }
+
+
+    public static void displayGraph(int[][] anyGraph){              // have to run this on another thread------ otherwise won't work with console while running
+        GraphGUI.GUIGraph = anyGraph;
+        GraphGUI.GUITotalVertices = totalVertices;
+
+        GraphGUI applet = new GraphGUI();
+        applet.init();
+
+
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(applet);
+        frame.setTitle("JGraphT Adapter to JGraphX Demo");
+//        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
 
 
     /* Driver program to test above functions */
@@ -245,6 +266,13 @@ public class MaxFlow {
 //        sink = 47;
 
         // -----------------------------------------------------------
+
+//        GraphGUI.GUIGraph = graph;
+//        GraphGUI.GUITotalVertices = totalVertices;
+        displayGraph(graph);
+
+        // -----------------------------------------------------------
+
         MaxFlow m = new MaxFlow();
 
         System.out.println("~ Initial graph of flow network ~");

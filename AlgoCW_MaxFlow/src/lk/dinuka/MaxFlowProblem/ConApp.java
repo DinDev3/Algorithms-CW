@@ -178,28 +178,30 @@ public class ConApp {
 
     private static void findMaxFlowOfNetwork() {            // Find the Max Flow of the flow network
 //        //---------- graph created from user input
-        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
-        for (int i = 0; i < noOfNodes; i++) {
-            for (int q = 0; q < noOfNodes; q++) {
-                graph[i][q] = graphMap.get(i)[q];
-            }
-        }
+//        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
+//        for (int i = 0; i < noOfNodes; i++) {
+//            for (int q = 0; q < noOfNodes; q++) {
+//                graph[i][q] = graphMap.get(i)[q];
+//            }
+//        }
 
         //---------- hard-coded graph
-//        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
-//                {0, 0, 10, 12, 0, 0},
-//                {0, 4, 0, 0, 14, 0},
-//                {0, 0, 9, 0, 0, 20},
-//                {0, 0, 0, 7, 0, 4},
-//                {0, 0, 0, 0, 0, 0}
-//        };
-//
-//        noOfNodes = 6;
-//        source = 0;
-//        sink = 5;
+        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
+                {0, 0, 10, 12, 0, 0},
+                {0, 4, 0, 0, 14, 0},
+                {0, 0, 9, 0, 0, 20},
+                {0, 0, 0, 7, 0, 4},
+                {0, 0, 0, 0, 0, 0}
+        };
+
+        noOfNodes = 6;
+        source = 0;
+        sink = 5;
         //-----------
 
         MaxFlow.totalVertices = noOfNodes;
+
+//        MaxFlow.displayGraph(graph);
 
         MaxFlow m = new MaxFlow();
 
