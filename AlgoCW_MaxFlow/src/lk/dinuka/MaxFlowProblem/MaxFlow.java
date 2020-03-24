@@ -140,6 +140,7 @@ public class MaxFlow {
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);         // this will close everything and exit the consoleApp
         frame.pack();
         frame.setVisible(true);
+        frame.setAlwaysOnTop(true);             // bring window in front of intelliJ when using ConApp
     }
 
 
@@ -297,4 +298,5 @@ https://www.geeksforgeeks.org/ford-fulkerson-algorithm-for-maximum-flow-problem/
 Can use this to take in inputs from the user
 https://practice.geeksforgeeks.org/problems/find-the-maximum-flow/0
 
+https://stackoverflow.com/questions/309023/how-to-bring-a-window-to-the-front
  */

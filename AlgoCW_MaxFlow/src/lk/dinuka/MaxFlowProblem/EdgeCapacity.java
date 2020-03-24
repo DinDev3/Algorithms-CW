@@ -26,3 +26,10 @@ public class EdgeCapacity extends DefaultWeightedEdge {
         return Double.toString(capacity);
     }
 }
+
+
+/*
+References:
+Displaying the capacity(weight) of the edges along the edges in the GUI graph
+https://stackoverflow.com/questions/13378519/how-represent-edge-weight-via-jgrapht-visualization
+ */
