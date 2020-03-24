@@ -1,3 +1,11 @@
+/*
+
+Name: Dinuka Ravijaya Piyadigama
+IIT ID: 2018373
+UoW ID: w1742104
+
+ */
+
 package lk.dinuka.MaxFlowProblem;
 
 import java.util.Arrays;
@@ -52,3 +60,8 @@ public class GraphGenerator {
 
     }
 }
+
+/*
+References:
+https://stackoverflow.com/questions/19648240/java-best-way-to-print-2d-array
+ */

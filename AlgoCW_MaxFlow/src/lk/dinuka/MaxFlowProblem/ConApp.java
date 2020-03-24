@@ -36,9 +36,9 @@ public class ConApp {
             //display main menu
             System.out.println("\n1) Initialize the flow network");
             System.out.println("2) Find the Max Flow of the flow network");
-            System.out.println("3) Delete link from flow network");
+            System.out.println("3) Delete a link from flow network");
             System.out.println("4) Modify the maximum capacity of a link");
-            System.out.println("5) View Created Graph of the flow network");
+            System.out.println("5) View Created Graph of the flow network");        // view of 2D array in console
             System.out.println("6) Exit program");
 //            Scanner sc = new Scanner(System.in);
             System.out.print("\nEnter Option:\n>>");
@@ -178,28 +178,30 @@ public class ConApp {
 
     private static void findMaxFlowOfNetwork() {            // Find the Max Flow of the flow network
 //        //---------- graph created from user input
-        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
-        for (int i = 0; i < noOfNodes; i++) {
-            for (int q = 0; q < noOfNodes; q++) {
-                graph[i][q] = graphMap.get(i)[q];
-            }
-        }
+//        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
+//        for (int i = 0; i < noOfNodes; i++) {
+//            for (int q = 0; q < noOfNodes; q++) {
+//                graph[i][q] = graphMap.get(i)[q];
+//            }
+//        }
 
         //---------- hard-coded graph
-//        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
-//                {0, 0, 10, 12, 0, 0},
-//                {0, 4, 0, 0, 14, 0},
-//                {0, 0, 9, 0, 0, 20},
-//                {0, 0, 0, 7, 0, 4},
-//                {0, 0, 0, 0, 0, 0}
-//        };
-//
-//        noOfNodes = 6;
-//        source = 0;
-//        sink = 5;
+        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
+                {0, 0, 10, 12, 0, 0},
+                {0, 4, 0, 0, 14, 0},
+                {0, 0, 9, 0, 0, 20},
+                {0, 0, 0, 7, 0, 4},
+                {0, 0, 0, 0, 0, 0}
+        };
+
+        noOfNodes = 6;
+        source = 0;
+        sink = 5;
         //-----------
 
         MaxFlow.totalVertices = noOfNodes;
+
+//        MaxFlow.displayGraph(graph);
 
         MaxFlow m = new MaxFlow();
 
@@ -216,7 +218,7 @@ public class ConApp {
             long timeElapsed = endTime - startTime;
             System.out.println("\nExecution time in nanoseconds  : " + timeElapsed);
 
-//            System.out.println(getTimeRatio(timeElapsed, timeElapsed));
+//            System.out.println(getTimeRatio(timeElapsed1, timeElapsed2));
 
         } catch (Exception e) {
             System.out.println("The graph needs to be initialized with a sink and a source before calculating the Max Flow");
@@ -225,7 +227,7 @@ public class ConApp {
 
     }
 
-    private static void deleteLink() {      // Delete link from flow network
+    private static void deleteLink() {      // Delete a link from flow network
         System.out.println("Choose the starting and ending nodes of the link to be deleted");
 
         System.out.print("Starting node: ");
@@ -292,5 +294,8 @@ public class ConApp {
         }
     }
 
-
+/*
+References:
+https://stackoverflow.com/questions/7602665/store-an-array-in-hashmap/7602742
+ */
 }
