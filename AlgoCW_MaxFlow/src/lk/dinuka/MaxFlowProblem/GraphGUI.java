@@ -1,3 +1,11 @@
+/*
+
+Name: Dinuka Ravijaya Piyadigama
+IIT ID: 2018373
+UoW ID: w1742104
+
+ */
+
 package lk.dinuka.MaxFlowProblem;
 
 import com.mxgraph.layout.mxCircleLayout;
@@ -16,7 +24,7 @@ public class GraphGUI extends
 
     private static final Dimension DEFAULT_SIZE = new Dimension(1000, 800);
 
-    private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
+    private JGraphXAdapter<String, EdgeCapacity> jgxAdapter;
 
     public static int[][] GUIGraph;
     static int GUITotalVertices;
@@ -24,8 +32,8 @@ public class GraphGUI extends
     @Override
     public void init() {
         // create a JGraphT graph
-        ListenableGraph<String, DefaultEdge> g =
-                new DefaultListenableGraph<>(new DefaultDirectedGraph<>(DefaultEdge.class));
+        ListenableGraph<String, EdgeCapacity> g =
+                new DefaultListenableGraph<>(new DefaultDirectedGraph<>(EdgeCapacity.class));
 
         // create a visualization using JGraph, via an adapter
         jgxAdapter = new JGraphXAdapter<>(g);
@@ -52,7 +60,7 @@ public class GraphGUI extends
             int[] startingNode = GUIGraph[u];
             for (int v = 0; v < GUITotalVertices; v++) {
                 if (startingNode[v] > 0) {     // if a capacity exists
-                    g.addEdge(Integer.toString(u), Integer.toString(v));
+                    g.addEdge(Integer.toString(u), Integer.toString(v),new EdgeCapacity(GUIGraph[u][v]));
                 }
 
             }
@@ -97,3 +105,12 @@ public class GraphGUI extends
 //    }
 
 }
+
+
+/*
+References:
+https://github.com/jgrapht/jgrapht
+https://stackoverflow.com/questions/1023184/max-flow-graph-simulation-in-java
+https://www.baeldung.com/jgrapht
+https://jgrapht.org/guide/LabeledEdges
+ */
