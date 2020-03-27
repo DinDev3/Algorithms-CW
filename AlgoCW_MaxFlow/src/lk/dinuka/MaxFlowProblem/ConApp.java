@@ -141,11 +141,20 @@ public class ConApp {
                 System.out.print("Starting Node: ");
                 intInputValidation();
                 int startNode = sc.nextInt();
+                while (!graphMap.containsKey(startNode)) {
+                    System.out.println("Only nodes between 0 and " + (noOfNodes - 1) + " are allowed. Please try again.");
+                    intInputValidation();           // validating integer input
+                    startNode = sc.nextInt();
+                }
 
                 System.out.print("Ending Node: ");
                 intInputValidation();
                 int endNode = sc.nextInt();
-
+                while (!graphMap.containsKey(startNode)) {
+                    System.out.println("Only nodes between 0 and " + (noOfNodes - 1) + " are allowed. Please try again.");
+                    intInputValidation();           // validating integer input
+                    startNode = sc.nextInt();
+                }
                 System.out.print("Enter the capacity of the Edge between these two nodes: ");
                 intInputValidation();
                 int capacity = sc.nextInt();
@@ -178,25 +187,25 @@ public class ConApp {
 
     private static void findMaxFlowOfNetwork() {            // Find the Max Flow of the flow network
 //        //---------- graph created from user input
-//        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
-//        for (int i = 0; i < noOfNodes; i++) {
-//            for (int q = 0; q < noOfNodes; q++) {
-//                graph[i][q] = graphMap.get(i)[q];
-//            }
-//        }
+        int[][] graph = new int[noOfNodes][noOfNodes];                // assign inputs to this array here
+        for (int i = 0; i < noOfNodes; i++) {
+            for (int q = 0; q < noOfNodes; q++) {
+                graph[i][q] = graphMap.get(i)[q];
+            }
+        }
 
         //---------- hard-coded graph
-        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
-                {0, 0, 10, 12, 0, 0},
-                {0, 4, 0, 0, 14, 0},
-                {0, 0, 9, 0, 0, 20},
-                {0, 0, 0, 7, 0, 4},
-                {0, 0, 0, 0, 0, 0}
-        };
-
-        noOfNodes = 6;
-        source = 0;
-        sink = 5;
+//        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
+//                {0, 0, 10, 12, 0, 0},
+//                {0, 4, 0, 0, 14, 0},
+//                {0, 0, 9, 0, 0, 20},
+//                {0, 0, 0, 7, 0, 4},
+//                {0, 0, 0, 0, 0, 0}
+//        };
+//
+//        noOfNodes = 6;
+//        source = 0;
+//        sink = 5;
         //-----------
 
         MaxFlow.totalVertices = noOfNodes;
@@ -233,14 +242,29 @@ public class ConApp {
         System.out.print("Starting node: ");
         intInputValidation();       // validate integer input
         int startNode = sc.nextInt();
+        while (!graphMap.containsKey(startNode)) {
+            System.out.println("Only nodes between 0 and " + (noOfNodes - 1) + " are allowed. Please try again.");
+            intInputValidation();           // validating integer input
+            startNode = sc.nextInt();
+        }
 
         System.out.print("Ending node: ");
         intInputValidation();       // validate integer input
         int endNode = sc.nextInt();
+        while (!graphMap.containsKey(endNode)) {
+            System.out.println("Only nodes between 0 and " + (noOfNodes - 1) + " are allowed. Please try again.");
+            intInputValidation();           // validating integer input
+            endNode = sc.nextInt();
+        }
 
-        graphMap.get(startNode)[endNode] = 0;           // when the capacity is 0; there's no link between the two nodes
+        if (graphMap.get(startNode)[endNode] != 0) {
+            System.out.println("Successfully deleted the link from " + startNode + " to " + endNode + " node from the flow network.");
+            graphMap.get(startNode)[endNode] = 0;           // when the capacity is 0; there's no link between the two nodes
 
-        System.out.println("Successfully deleted the link between " + startNode + " & " + endNode + " nodes from the flow network");
+        } else {
+            System.out.println("There's no capacity from " + startNode + " to " + endNode + " node in the flow network.");
+        }
+
 
     }
 
@@ -250,10 +274,20 @@ public class ConApp {
         System.out.print("Starting node: ");
         intInputValidation();       // validate integer input
         int startNode = sc.nextInt();
+        while (!graphMap.containsKey(startNode)) {
+            System.out.println("Only nodes between 0 and " + (noOfNodes - 1) + " are allowed. Please try again.");
+            intInputValidation();           // validating integer input
+            startNode = sc.nextInt();
+        }
 
         System.out.print("Ending node: ");
         intInputValidation();       // validate integer input
         int endNode = sc.nextInt();
+        while (!graphMap.containsKey(endNode)) {
+            System.out.println("Only nodes between 0 and " + (noOfNodes - 1) + " are allowed. Please try again.");
+            intInputValidation();           // validating integer input
+            endNode = sc.nextInt();
+        }
 
         System.out.print("Enter the new maximum capacity of the link: ");
         intInputValidation();             // validate integer input
@@ -261,7 +295,7 @@ public class ConApp {
 
         graphMap.get(startNode)[endNode] = changedMaxCapacity;           // new max capacity assigned
 
-        System.out.println("Successfully changed the maximum capacity on the link between " + startNode + " & " + endNode + " nodes of the flow network");
+        System.out.println("Successfully changed the maximum capacity on the link from node " + startNode + " to node " + endNode + " of the flow network");
 
     }
 
@@ -294,8 +328,9 @@ public class ConApp {
         }
     }
 
+}
+
 /*
 References:
 https://stackoverflow.com/questions/7602665/store-an-array-in-hashmap/7602742
  */
-}
