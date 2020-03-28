@@ -19,6 +19,7 @@ import org.jgrapht.graph.DefaultListenableGraph;
 import javax.swing.*;
 import java.awt.*;
 
+// Creates and displays a graph
 public class GraphGUI extends
         JApplet {
 

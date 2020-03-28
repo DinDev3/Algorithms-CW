@@ -11,6 +11,7 @@ package lk.dinuka.MaxFlowProblem;
 import java.util.Arrays;
 import java.util.Random;
 
+// Used to create a random graph with a specified number of nodes and edges﻿
 public class GraphGenerator {
     public static void main(String[] args) {
 
