@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+// Finds the maximum flow of a graph
 public class MaxFlow {
     //    static int totalVertices = 6;    //Number of vertices the flow network
     static int totalVertices;    //Number of vertices the flow network
@@ -125,7 +126,7 @@ public class MaxFlow {
     }
 
 
-    public static void displayGraph(int[][] anyGraph){              // have to run this on another thread------ otherwise won't work with console while running
+    public static void displayGraph(int[][] anyGraph){              // have to run this on another thread to get optimum timings
         GraphGUI.GUIGraph = anyGraph;
         GraphGUI.GUITotalVertices = totalVertices;
 
@@ -163,6 +164,7 @@ public class MaxFlow {
         source = 0;
         sink = 5;
 
+        // graph 1
 //        int[][] graph = new int[][]{{0, 16, 13, 0, 0, 0},
 //                {0, 0, 10, 12, 0, 0},
 //                {0, 4, 0, 0, 14, 0},
@@ -174,7 +176,7 @@ public class MaxFlow {
 //        source = 0;
 //        sink = 5;
 
-
+        // graph 2
 //        int[][] graph = new int[][]{
 //                {0, 16, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //                {0, 0, 10, 12, 15, 0, 0, 0, 0, 0, 0, 0},
@@ -193,7 +195,7 @@ public class MaxFlow {
 //        source = 0;
 //        sink = 11;
 
-
+        // graph 3
 //        int[][] graph = new int[][]{
 //                {0, 20, 10, 5, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //                {0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -224,7 +226,7 @@ public class MaxFlow {
 //        source = 0;
 //        sink = 23;
 
-//
+        // graph 4
 //        int[][] graph = new int[][]{
 //                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 //                {0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 0, 0},

@@ -8,10 +8,12 @@ UoW ID: w1742104
 
 package lk.dinuka.MaxFlowProblem;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
+// Controls all the console menu options.
 public class ConApp {
     private static int noOfNodes;
     private static int source;              // starting node of the floor network
@@ -311,6 +313,7 @@ public class ConApp {
             }
         }
 
+        displayGraph(graph);            // used to get a preview of the created graph
         System.out.println(Arrays.deepToString(graph));         // display graph
     }
 
@@ -328,6 +331,24 @@ public class ConApp {
         }
     }
 
+
+    public static void displayGraph(int[][] anyGraph){              // have to run this on another thread to get optimum timings
+        GraphGUI.GUIGraph = anyGraph;
+        GraphGUI.GUITotalVertices = noOfNodes;
+
+        GraphGUI applet = new GraphGUI();
+        applet.init();
+
+
+        JFrame frame = new JFrame();
+        frame.getContentPane().add(applet);
+        frame.setTitle("JGraphT Adapter to JGraphX Demo");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);         // this will close everything and exit the consoleApp
+        frame.pack();
+        frame.setVisible(true);
+        frame.setAlwaysOnTop(true);             // bring window in front of intelliJ when using ConApp
+    }
 }
 
 /*
